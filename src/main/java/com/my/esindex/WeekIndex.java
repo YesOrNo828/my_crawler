@@ -32,8 +32,8 @@ public class WeekIndex {
     public static void main(String[] args) {
         createWeekIndex(jd, settingJd);
         createWeekIndex(taobao, settingTaoxi);
-        createWeekIndex(tmall, settingTaoxi);
-        createWeekIndex(vip, settingVip);
+//        createWeekIndex(tmall, settingTaoxi);
+//        createWeekIndex(vip, settingVip);
     }
 
     private static void createWeekIndex(String type, String setting) {
@@ -42,7 +42,7 @@ public class WeekIndex {
         calendar.add(Calendar.DATE, 8 - calendar.get(Calendar.DAY_OF_WEEK));
         int week = calendar.get(Calendar.WEEK_OF_YEAR);
         int year = calendar.get(Calendar.YEAR);
-        String index = "ec_" + type + "_" + year + "_w" + week;
+        String index = "ec_" + type + "_" + year + "_w" + (week-1);
         try {
             String result = Http.doPost(Http.url + index, setting);
             System.out.println(index + " result:" + result);
