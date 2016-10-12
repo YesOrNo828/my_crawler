@@ -20,7 +20,7 @@ import java.util.*;
 public class MonitorEcCount {
 
     public static void main(String[] args) {
-        new Timer().schedule(new TimerTask() {
+        /*new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 WeekIndex.main(new String[1]);
@@ -31,7 +31,7 @@ public class MonitorEcCount {
             public void run() {
                 MonthIndex.main(new String[1]);
             }
-        }, 0, 1000 * 60 * 60 * 24 * 7);
+        }, 0, 1000 * 60 * 60 * 24 * 7);*/
         List<Date> specialList = getSpecialTime(new Integer[]{0,9,12,15,18,21});
         specialList.stream().forEach(date -> new Timer().schedule(new MyCountTimeTask(), date, 1000 * 60 * 60 * 24));
     }

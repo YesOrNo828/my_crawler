@@ -10,5 +10,6 @@ public class TmallSpider {
 
     public static void main(String[] args) {
         Spider.create(new TmallPageProcessor()).addUrl("https://detail.tmall.com/item.htm?id=523029919958").run();
+        Spider.create(new TmallPageProcessor()).addUrl("https://detail.tmall.com/item.htm?id=523029919958").run();
     }
 }

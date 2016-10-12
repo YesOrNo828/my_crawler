@@ -17,6 +17,7 @@ public class MonthIndex {
     public static String suning = "suning";
     private static String settingVideo = null;
     public static String video = "video";
+    public static String mia = "mia";
 
 
     static {
