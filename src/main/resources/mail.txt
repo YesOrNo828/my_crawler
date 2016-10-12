@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/html">
+<body>
+监控时间：nowTime
+<table border="1">
+    <tr>
+        <td align="center">索引</td>
+        <td align="center">总量</td>
+        <td align="center">今日总量</td>
+        <td align="center">今日商品总量</td>
+        <td align="center">今日评论总量</td>
+        <td align="center">今日商铺总量</td>
+    </tr>
+    <tr>
+        <td align="center">gome_index</td>
+        <td align="center">gome_total</td>
+        <td align="center">gome_today_total</td>
+        <td align="center">gome_today_goods_total</td>
+        <td align="center">gome_today_rate_total</td>
+        <td align="center">gome_today_shops_total</td>
+    </tr>
+    <tr>
+        <td align="center">suning_index</td>
+        <td align="center">suning_total</td>
+        <td align="center">suning_today_total</td>
+        <td align="center">suning_today_goods_total</td>
+        <td align="center">suning_today_rate_total</td>
+        <td align="center">suning_today_shops_total</td>
+    </tr>
+    <tr>
+        <td align="center">jd_index</td>
+        <td align="center">jd_total</td>
+        <td align="center">jd_today_total</td>
+        <td align="center">jd_today_goods_total</td>
+        <td align="center">jd_today_rate_total</td>
+        <td align="center">jd_today_shops_total</td>
+    </tr>
+    <tr>
+        <td align="center">tmall_index</td>
+        <td align="center">tmall_total</td>
+        <td align="center">tmall_today_total</td>
+        <td align="center">tmall_today_goods_total</td>
+        <td align="center">tmall_today_rate_total</td>
+        <td align="center">tmall_today_shops_total</td>
+    </tr>
+    <tr>
+        <td align="center">taobao_index</td>
+        <td align="center">taobao_total</td>
+        <td align="center">taobao_today_total</td>
+        <td align="center">taobao_today_goods_total</td>
+        <td align="center">taobao_today_rate_total</td>
+        <td align="center">taobao_today_shops_total</td>
+    </tr>
+    <tr>
+            <td align="center">vip_index</td>
+            <td align="center">vip_total</td>
+            <td align="center">vip_today_total</td>
+            <td align="center">vip_today_goods_total</td>
+            <td align="center">vip_today_rate_total</td>
+            <td align="center">vip_today_shops_total</td>
+        </tr>
+    </br>
+    </br>
+</table>
+</body>
+</html>
