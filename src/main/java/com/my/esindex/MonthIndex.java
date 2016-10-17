@@ -18,6 +18,8 @@ public class MonthIndex {
     private static String settingVideo = null;
     public static String video = "video";
     public static String mia = "mia";
+    public static String vip = "vip";
+    private static String settingVip = null;
 
 
     static {
@@ -25,6 +27,7 @@ public class MonthIndex {
             settingSuning = FileUtils.readFileToString(new File(MonthIndex.class.getResource("/").getFile() + suning + ".txt"));
             settingGome = FileUtils.readFileToString(new File(MonthIndex.class.getResource("/").getFile() + gome + ".txt"));
             settingVideo = FileUtils.readFileToString(new File(MonthIndex.class.getResource("/").getFile() + video + ".txt"));
+            settingVip = FileUtils.readFileToString(new File(MonthIndex.class.getResource("/").getFile() + vip + ".txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }

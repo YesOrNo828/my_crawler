@@ -3,6 +3,7 @@ package com.my.esindex;
 import com.alibaba.fastjson.JSONObject;
 import com.my.mail.MailUtil;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 
 import javax.mail.MessagingException;
 import java.io.File;
@@ -83,10 +84,11 @@ public class MonitorEcCount {
             List<Map<String, String>> list = new ArrayList<>();
             list.add(queryCountByType(MonthIndex.gome));
             list.add(queryCountByType(MonthIndex.suning));
+            list.add(queryCountByType(MonthIndex.mia));
+            list.add(queryCountByType(MonthIndex.vip));
             list.add(queryCountByType(WeekIndex.jd));
             list.add(queryCountByType(WeekIndex.tmall));
             list.add(queryCountByType(WeekIndex.taobao));
-            list.add(queryCountByType(WeekIndex.vip));
             try {
                 String mailContent = FileUtils.readFileToString(new File(MonthIndex.class.getResource("/").getFile() + "mail.txt")).trim();
                 for (int i = 0; i < list.size(); i++) {
@@ -106,8 +108,7 @@ public class MonitorEcCount {
 
         public static void main(String[] args) {
             MyCountTimeTask myCountTimeTask = new MyCountTimeTask();
-            Map<String, String> my = myCountTimeTask.queryCountByType(WeekIndex.vip);
-            System.out.println(my.size());
+            myCountTimeTask.run();
         }
 
         private Map<String, String> queryCountByType(String type) {
@@ -116,8 +117,13 @@ public class MonitorEcCount {
                 String index = getIndexName(type);
                 String url = Http.url + index + "/goods,rate,shop/_search?search_type=count";
                 String result = Http.doPost(url, "");
-                long total = JSONObject.parseObject(result).getJSONObject("hits").getLong("total");
                 count.put(type + "_index", index);
+                if (StringUtils.isBlank(result)) {
+                    count.put(type + "_total", "0");
+                    count.put(type + "_today_total", "0");
+                    count.put(type + "_today_goods_total", "0");
+                }
+                long total = JSONObject.parseObject(result).getJSONObject("hits").getLong("total");
                 count.put(type + "_total", String.valueOf(total));
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
@@ -167,6 +173,8 @@ public class MonitorEcCount {
         switch (type) {
             case "gome":
             case "suning":
+            case "mia":
+            case "vip":
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(new Date());
                 calendar.add(Calendar.MONTH, 1);
@@ -176,7 +184,6 @@ public class MonitorEcCount {
             case "jd":
             case "taobao":
             case "tmall":
-            case "vip":
                 Calendar calendarw = Calendar.getInstance();
                 calendarw.setTime(new Date());
                 int week = calendarw.get(Calendar.WEEK_OF_YEAR);

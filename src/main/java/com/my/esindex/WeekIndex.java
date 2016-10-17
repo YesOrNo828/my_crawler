@@ -13,17 +13,14 @@ import java.util.Date;
 public class WeekIndex {
     private static String settingJd = null;
     private static String settingTaoxi = null;
-    private static String settingVip = null;
     public static String jd = "jd";
     public static String taobao = "taobao";
     public static String tmall = "tmall";
-    public static String vip = "vip";
 
     static {
         try {
             settingJd = FileUtils.readFileToString(new File(MonthIndex.class.getResource("/").getFile() + jd + ".txt"));
             settingTaoxi = FileUtils.readFileToString(new File(MonthIndex.class.getResource("/").getFile() + "taoxi.txt"));
-            settingVip = FileUtils.readFileToString(new File(MonthIndex.class.getResource("/").getFile() + vip + ".txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,7 +30,6 @@ public class WeekIndex {
         createWeekIndex(jd, settingJd);
         createWeekIndex(taobao, settingTaoxi);
 //        createWeekIndex(tmall, settingTaoxi);
-//        createWeekIndex(vip, settingVip);
     }
 
     private static void createWeekIndex(String type, String setting) {

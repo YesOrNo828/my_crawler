@@ -51,13 +51,21 @@
         <td align="center">taobao_today_shops_total</td>
     </tr>
     <tr>
-            <td align="center">vip_index</td>
-            <td align="center">vip_total</td>
-            <td align="center">vip_today_total</td>
-            <td align="center">vip_today_goods_total</td>
-            <td align="center">vip_today_rate_total</td>
-            <td align="center">vip_today_shops_total</td>
-        </tr>
+        <td align="center">vip_index</td>
+        <td align="center">vip_total</td>
+        <td align="center">vip_today_total</td>
+        <td align="center">vip_today_goods_total</td>
+        <td align="center">无</td>
+        <td align="center">无</td>
+    </tr>
+    <tr>
+        <td align="center">mia_index</td>
+        <td align="center">mia_total</td>
+        <td align="center">mia_today_total</td>
+        <td align="center">mia_today_goods_total</td>
+        <td align="center">mia_today_rate_total</td>
+        <td align="center">无</td>
+    </tr>
     </br>
     </br>
 </table>
