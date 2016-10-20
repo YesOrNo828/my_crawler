@@ -1,0 +1,255 @@
+{
+    "settings": {
+        "number_of_shards": 1,
+        "number_of_replicas": 1
+    },
+    "mappings": {
+        "shop": {
+            "properties": {
+                "bScope": {
+                    "type": "string"
+                },
+                "blAddr": {
+                    "type": "string"
+                },
+                "blExpireDate": {
+                    "type": "string"
+                },
+                "blNo": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "comAddr": {
+                    "type": "string"
+                },
+                "companyName": {
+                    "type": "string"
+                },
+                "corporation": {
+                    "type": "string"
+                },
+                "credibilityScore": {
+                    "type": "double"
+                },
+                "credibilityScoreCompare": {
+                    "type": "double"
+                },
+                "credibilityScoreNum": {
+                    "type": "double"
+                },
+                "deliverScore": {
+                    "type": "double"
+                },
+                "deliverScoreCompare": {
+                    "type": "double"
+                },
+                "deliverScoreNum": {
+                    "type": "double"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "fax": {
+                    "type": "string"
+                },
+                "hotline": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "indCredibilityScore": {
+                    "type": "double"
+                },
+                "indDeliverScore": {
+                    "type": "double"
+                },
+                "indServiceScore": {
+                    "type": "double"
+                },
+                "licencePic": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "province": {
+                    "type": "string"
+                },
+                "regCapital": {
+                    "type": "string"
+                },
+                "score": {
+                    "type": "double"
+                },
+                "scoreNum": {
+                    "type": "double"
+                },
+                "serviceScore": {
+                    "type": "double"
+                },
+                "serviceScoreCompare": {
+                    "type": "double"
+                },
+                "serviceScoreNum": {
+                    "type": "double"
+                },
+                "shopCreateDate": {
+                    "type": "date"
+                },
+                "shopId": {
+                    "type": "string"
+                },
+                "shopLevel": {
+                    "type": "string"
+                },
+                "shopName": {
+                    "type": "string"
+                },
+                "undertacker": {
+                    "type": "string"
+                },
+                "zipCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "goods": {
+            "properties": {
+                "attrDesc": {
+                    "type": "string"
+                },
+                "brandCode": {
+                    "type": "string"
+                },
+                "brandId": {
+                    "type": "string"
+                },
+                "brandName": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "categoryId": {
+                    "type": "string"
+                },
+                "categoryName": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "fanQuan": {
+                    "type": "string"
+                },
+                "general": {
+                    "type": "long"
+                },
+                "generalPercent": {
+                    "type": "double"
+                },
+                "good": {
+                    "type": "long"
+                },
+                "goodPercent": {
+                    "type": "double"
+                },
+                "imgUrl": {
+                    "type": "string"
+                },
+                "mPrice": {
+                    "type": "double"
+                },
+                "mPriceEndTime": {
+                    "type": "date"
+                },
+                "manZhe": {
+                    "type": "string"
+                },
+                "pid": {
+                    "type": "string"
+                },
+                "poor": {
+                    "type": "long"
+                },
+                "poorPercent": {
+                    "type": "double"
+                },
+                "price": {
+                    "type": "double"
+                },
+                "promActUrl": {
+                    "type": "string"
+                },
+                "promPrice": {
+                    "type": "double"
+                },
+                "promType": {
+                    "type": "string"
+                },
+                "rateTag": {
+                    "type": "string"
+                },
+                "recycling": {
+                    "type": "string"
+                },
+                "shopId": {
+                    "type": "string"
+                },
+                "skuDesc": {
+                    "type": "string"
+                },
+                "skuId": {
+                    "type": "string"
+                },
+                "thirdProduct": {
+                    "type": "boolean"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "totalComment": {
+                    "type": "long"
+                },
+                "prdLoc": {
+                    "type": "string"
+                }
+            }
+        },
+        "rate": {
+            "properties": {
+                "rateTags": {
+                    "type": "string"
+                },
+                "pubTime": {
+                    "format": "strict_date_optional_time||epoch_millis",
+                    "type": "date"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "count": {
+                    "type": "long"
+                },
+                "score": {
+                    "type": "double"
+                },
+                "rateId": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "pid": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

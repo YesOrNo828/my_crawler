@@ -1,0 +1,64 @@
+{
+  "settings": {
+    "number_of_shards": 2,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "goods": {
+      "properties": {
+        "catname": {
+          "type": "string"
+        },
+        "beforeprice": {
+          "type": "string"
+        },
+        "freight": {
+          "type": "string"
+        },
+        "discount": {
+          "type": "string"
+        },
+        "pid": {
+          "type": "string"
+        },
+        "purchasequantity": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "clearfix": {
+          "type": "string"
+        },
+        "savingamoun": {
+          "type": "string"
+        },
+        "createTime": {
+          "format": "strict_date_optional_time||epoch_millis",
+          "type": "date"
+        },
+        "integral": {
+          "type": "string"
+        },
+        "nowprice": {
+          "type": "string"
+        },
+        "parameter": {
+          "type": "string"
+        },
+        "seedId": {
+          "type": "long"
+        },
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "taskId": {
+          "type": "long"
+        }
+      }
+    }
+  }
+}

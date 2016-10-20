@@ -25,9 +25,9 @@ public class Client {
             os.flush();
             System.out.println("Client:" + readLine);
             System.out.println("Server:" + is.readLine());
-            readLine = console.readLine(); //从系统标准输入读入一字符串
+            readLine = console.readLine();
 
-        } //继续循环
+        }
 
         os.close(); //关闭Socket输出流
 

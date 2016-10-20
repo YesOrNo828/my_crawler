@@ -1,0 +1,197 @@
+{
+    "settings": {
+        "number_of_shards": 2,
+        "number_of_replicas": 1
+    },
+    "mappings": {
+        "goods": {
+            "properties": {
+                "attrDesc": {
+                    "type": "string"
+                },
+                "brandCode": {
+                    "type": "string"
+                },
+                "brandId": {
+                    "type": "string"
+                },
+                "brandName": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "categoryName": {
+                    "type": "string"
+                },
+                "fanQuan": {
+                    "type": "string"
+                },
+                "imgUrl": {
+                    "type": "string"
+                },
+                "pid": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "double"
+                },
+                "score": {
+                    "type": "double"
+                },
+                "score1": {
+                    "type": "long"
+                },
+                "score2": {
+                    "type": "long"
+                },
+                "score3": {
+                    "type": "long"
+                },
+                "score4": {
+                    "type": "long"
+                },
+                "score5": {
+                    "type": "long"
+                },
+                "sellers": {
+                    "properties": {
+                        "price": {
+                            "type": "double"
+                        },
+                        "shopId": {
+                            "type": "string"
+                        },
+                        "shopName": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "shopId": {
+                    "type": "string"
+                },
+                "tags": {
+                    "properties": {
+                        "optionIndexSeq": {
+                            "type": "long"
+                        },
+                        "propertyName": {
+                            "type": "string"
+                        },
+                        "value": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "totalComment": {
+                    "type": "long"
+                },
+                "prdLoc": {
+                    "type": "string"
+                },
+                "rateFunction": {
+                    "type": "string"
+                }
+            }
+        },
+        "rate": {
+            "properties": {
+                "pubTime": {
+                    "format": "strict_date_optional_time||epoch_millis",
+                    "type": "date"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "skuDesc": {
+                    "type": "string"
+                },
+                "shopName": {
+                    "type": "string"
+                },
+                "shopId": {
+                    "type": "string"
+                },
+                "userLevel": {
+                    "type": "string"
+                },
+                "score": {
+                    "type": "double"
+                },
+                "rateId": {
+                    "type": "string"
+                },
+                "device": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "pid": {
+                    "type": "string"
+                },
+                "rateTags": {
+                    "type": "string"
+                }
+            }
+        },
+        "shop": {
+            "properties": {
+                "city": {
+                    "type": "string"
+                },
+                "comAddr": {
+                    "type": "string"
+                },
+                "companyName": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "deliverScore": {
+                    "type": "double"
+                },
+                "deliverScoreCompare": {
+                    "type": "double"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "itemScore": {
+                    "type": "double"
+                },
+                "itemScoreCompare": {
+                    "type": "double"
+                },
+                "licenceUrl": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "province": {
+                    "type": "string"
+                },
+                "score": {
+                    "type": "double"
+                },
+                "serviceScore": {
+                    "type": "double"
+                },
+                "serviceScoreCompare": {
+                    "type": "double"
+                },
+                "shopLogo": {
+                    "type": "string"
+                },
+                "shopName": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
