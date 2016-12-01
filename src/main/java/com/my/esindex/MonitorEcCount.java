@@ -177,8 +177,8 @@ public class MonitorEcCount {
             case "vip":
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(new Date());
-                calendar.add(Calendar.MONTH, 1);
                 int m = calendar.get(Calendar.MONTH);
+                m++;
                 int year = calendar.get(Calendar.YEAR);
                 return "ec_" + type + "_" + year + "_m" + m;
             case "jd":
