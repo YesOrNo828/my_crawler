@@ -1,11 +1,14 @@
 package com.my.crawler;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.my.esindex.MonitorEcCount;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +24,10 @@ public class EcTest {
 //        List<Date> dates = getSpecialTime(new Integer[]{0, 9, 12, 15, 18, 21});
 //        dates.stream().forEach(date -> System.out.println(date));
 //        ,xuanlubin@adtime.com,caoquanlong@adtime.com,fumingjiang@adtime.com,xuliya@adtime.com,chenshuiping@zxuner.com,zhujianquan@adtime.com,wangqin@zxuner.com,wangyanjun@adtime.com
+        String json = "{startUrl:\"https://www.renrenche.com/cn/kaidilake\"}";
+        JSONObject jsonObject = JSON.parseObject(json);
+        System.out.println(jsonObject.get("startUrl"));
+
     }
 
     private static void rate() throws IOException {

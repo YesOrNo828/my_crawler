@@ -33,7 +33,7 @@ public class MailUtil {
 
     static {
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.host", "172.16.0.106");
+        props.put("mail.smtp.host", "mail.adtime.com");
         props.put("mail.user", "yq_service@adtime.com");
         props.put("mail.password", "8R80znN5");
         authenticator = new Authenticator() {
