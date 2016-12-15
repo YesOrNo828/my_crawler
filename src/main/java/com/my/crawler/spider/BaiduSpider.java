@@ -37,13 +37,13 @@ public class BaiduSpider {
                 baiduUrl = document.select("div#content_left div h3.t a").get(0).attr("href");
             } catch (Exception e) {
                 System.out.println(companyNames.get(i) + "\t");
-                lastUrls.add(companyNames.get(i));
+                lastUrls.add(companyNames.get(i) + "\n");
                 e.printStackTrace();
                 continue;
             }
             String real = getRealUrl(baiduUrl);
             System.out.println(i + companyNames.get(i) + "\t" + real);
-            lastUrls.add(companyNames.get(i) + "\t" + real);
+            lastUrls.add(companyNames.get(i) + "\t" + real + "\n");
         }
         long d = System.currentTimeMillis();
         lastUrls.stream().forEach(u -> {

@@ -6,7 +6,11 @@
 
     <groupId>com.my</groupId>
     <artifactId>crawler</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>jetty</module>
+    </modules>
 
     <properties>
         <java_source_version>1.8</java_source_version>
@@ -16,6 +20,13 @@
     </properties>
 
     <dependencies>
+
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>javax.servlet-api</artifactId>-->
+            <!--<version>4.0.0-b01</version>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
