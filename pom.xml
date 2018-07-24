@@ -34,11 +34,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.adtime.http</groupId>
-            <artifactId>resource</artifactId>
-            <version>1.0.1.002-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>us.codecraft</groupId>
             <artifactId>webmagic-core</artifactId>
             <version>0.5.3</version>
@@ -57,6 +52,22 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.3.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>4.3.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.3.1.RELEASE</version>
         </dependency>
     </dependencies>
 

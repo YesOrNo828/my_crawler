@@ -12,11 +12,11 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 public class JDSpider {
 
     public static void main(String[] args) {
-//        Spider.create(new JDPageProcessor()).addUrl("http://item.jd.com/2600254.html").run();
+        Spider.create(new JDPageProcessor()).addUrl("http://item.jd.com/2600254.html").run();
         Spider.create(new JDPageProcessor()).addPipeline(new Pipeline() {
             @Override
             public void process(ResultItems resultItems, Task task) {
-
+                System.out.println(resultItems);
             }
         }).addUrl("http://item.jd.com/1856586.html").run();
     }
