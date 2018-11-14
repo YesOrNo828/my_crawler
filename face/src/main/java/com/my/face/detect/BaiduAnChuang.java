@@ -24,13 +24,19 @@ import java.util.Map;
  */
 public class BaiduAnChuang {
     private static final Logger LOG = LoggerFactory.getLogger(BaiduAnChuang.class);
-    private static final String apiUrl = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/classification/anchuang";
+    private static final String apiUrl = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/classification/";
     private static final String access_token = "24.910bbae670d6d1bc631194edfad57c25.2592000.1544710989.282335-14777381";
     protected static final String dir = "E:\\task\\百度图片抓取\\";
 
     public static void main(String[] args) throws IOException {
+//        String apiType = "anchuang";
+        String apiType = "heiyanquan";
+        classify(apiType);
+    }
+
+    public static void classify(String apiType) throws IOException {
         File in = new File(dir + "detect_v3_facepp_skin.txt");
-        File out = new File(dir + "detect_v3_anchuang.txt");
+        File out = new File(dir + "detect_v3_" + apiType + ".txt");
         if (!out.exists()) {
             out.createNewFile();
         }
@@ -65,13 +71,13 @@ public class BaiduAnChuang {
             try {
                 fileWriter = new FileWriter(out, true);
                 String base64 = Base64Util.fileToBase64(img);
-                String data = anchuang(base64);
+                String data = post(base64, apiType);
                 LOG.info("{}", data);
-                if (StringUtils.isNotBlank(data) && data.contains("anchuang")) {
+                if (StringUtils.isNotBlank(data) && data.contains(apiType)) {
                     JSONArray results = JSON.parseObject(data).getJSONArray("results");
                     for (int r = 0; r < results.size(); r++) {
                         JSONObject result = results.getJSONObject(r);
-                        if (result.containsKey("name") && result.getString("name").contains("anchuang")) {
+                        if (result.containsKey("name") && result.getString("name").contains(apiType)) {
                             Double anchuangScore = result.getDouble("score");
 
                             IOUtils.write(imgName + "\t" + baidu_face_token + "\t" + baidu_face_pro + "\t" + baidu_face_type + "\t"
@@ -81,7 +87,7 @@ public class BaiduAnChuang {
                             break;
                         }
                     }
-                } else if (data.contains("Open api daily request limit reached")){
+                } else if (data.contains("Open api daily request limit reached")) {
                     try {
                         Thread.currentThread().sleep(1000);
                     } catch (InterruptedException e) {
@@ -100,15 +106,10 @@ public class BaiduAnChuang {
                 e.printStackTrace();
             }
         }
-        File img = new File(dir + "down\\0.jpg");
-        String base64 = Base64Util.fileToBase64(img);
-        String data = anchuang(base64);
-        LOG.info("{}", data);
     }
 
-
-    public static String anchuang(String imageBase64) {
-        String url = apiUrl + "?access_token=" + access_token;
+    public static String post(String imageBase64, String apiType) {
+        String url = apiUrl + apiType + "?access_token=" + access_token;
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("image", imageBase64);
         return HttpUtil.doPost(url, JSON.toJSONString(paramMap));
