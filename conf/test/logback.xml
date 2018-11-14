@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss SSS} [%thread] %-5level \(%F:%L\) - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="sift" class="ch.qos.logback.classic.sift.SiftingAppender">
+		<discriminator>
+			<Key>productId</Key>
+			<DefaultValue>0</DefaultValue>
+		</discriminator>
+		<filter class="com.netease.nbot.custom.common.logback.NumCompareMDCFilter">  
+  			<MDCKey><![CDATA[productId]]></MDCKey>   
+  			<Op><![CDATA[>]]></Op>  
+  			<Value><![CDATA[0.0]]></Value>  
+		</filter> 
+		<sift>
+			<!--每天生成一个日志文件，保存30天的日志文件。 -->
+			<appender name="dayFile-${productId}"
+				class="ch.qos.logback.core.rolling.RollingFileAppender">
+				<file>log/${productId}/log.txt</file>
+				<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+					<fileNamePattern>log/${productId}/log_%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+					<maxHistory>1</maxHistory>
+					<timeBasedFileNamingAndTriggeringPolicy  
+           						 class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">  
+			        <!-- or whenever the file size reaches 100MB -->  
+			        <maxFileSize>500MB</maxFileSize>  
+			      </timeBasedFileNamingAndTriggeringPolicy>  
+				</rollingPolicy>
+				<encoder>
+					<pattern>%d{yyyy-MM-dd HH:mm:ss SSS} [%thread] %-5level \(%F:%L\) - %msg%n
+					</pattern>
+				</encoder>
+			</appender>
+		</sift>
+	</appender>
+	<!--每天生成一个日志文件，保存30天的日志文件。 -->
+	<appender name="dayFile"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/log.txt</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>log/log_%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+			<maxHistory>1</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy  
+           						 class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">  
+	        <!-- or whenever the file size reaches 100MB -->  
+	        <maxFileSize>500MB</maxFileSize>  
+	      </timeBasedFileNamingAndTriggeringPolicy> 
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss SSS} [%thread] %-5level \(%F:%L\) - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.netease.nbot" level="info"
+		additivity="false">
+		<appender-ref ref="stdout" />
+		<appender-ref ref="sift" />
+		<appender-ref ref="dayFile" />
+	</logger>
+</configuration>
