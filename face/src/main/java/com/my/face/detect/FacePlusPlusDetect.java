@@ -1,6 +1,7 @@
 package com.my.face.detect;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.my.common.util.Base64Util;
 import com.my.common.util.HttpUtil;
@@ -39,15 +40,20 @@ public class FacePlusPlusDetect {
         List<String> lines = IOUtils.readLines(new FileInputStream(in));
         List<String> outLines = IOUtils.readLines(new FileInputStream(out));
         FileWriter fileWriter = null;
-        int start = 0;
+        int outLastName = 0;
         if (CollectionUtils.isNotEmpty(outLines)) {
-            start = outLines.size();
-        } else {
-
+            String line = outLines.get(outLines.size() - 1);
+            String name = line.substring(0, line.indexOf(".jpg"));
+            outLastName = Integer.parseInt(name);
         }
 
-        for (int i = start; i < lines.size(); i++) {
+        for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
+            String name = line.substring(0, line.indexOf(".jpg"));
+            int startNow = Integer.parseInt(name);
+            if (outLastName >= startNow) {
+                continue;
+            }
             String[] lineArr = line.split("\t");
             String imgName = lineArr[0];
             String baidu_face_token = lineArr[1];
@@ -55,7 +61,12 @@ public class FacePlusPlusDetect {
             String baidu_face_type = lineArr[3];
             String baidu_face_type_pro = lineArr[4];
             String baidu_data = lineArr[5];
-            String baidu_data1 = lineArr[6];
+            String baidu_data1 = lineArr.length > 6 ? lineArr[6] : "";
+            Double face_pro = Double.valueOf(baidu_face_pro);
+            Double human_pro = Double.valueOf(baidu_face_type_pro);
+            if (face_pro < 0.5 || human_pro < 0.5) {
+                continue;
+            }
             File img = new File(dir + "down\\" + imgName);
             if (!img.exists()) {
                 continue;
@@ -64,22 +75,39 @@ public class FacePlusPlusDetect {
                 fileWriter = new FileWriter(out, true);
                 String base64 = Base64Util.fileToBase64(img);
                 String data = detect(base64);
-                LOG.info("{}", data);
+                LOG.info("{}\t{}", imgName, data);
                 if (StringUtils.isNotBlank(data) && data.contains("face_token")) {
-                    JSONObject face = JSON.parseObject(data).getJSONArray("faces").getJSONObject(0);
-                    String facepp_token = face.getString("face_token");
-                    JSONObject skin = face.getJSONObject("attributes").getJSONObject("skinstatus");
-                    // {"acne":16.189,"dark_circle":7.229,"health":18.201,"stain":9.085}
-                    Double acne = skin.getDouble("acne");
-                    Double dark_circle = skin.getDouble("dark_circle");
-                    Double health = skin.getDouble("health");
-                    Double stain = skin.getDouble("stain");
-                    String image_id = JSON.parseObject(data).getString("image_id");
+                    JSONArray faces = JSON.parseObject(data).getJSONArray("faces");
+                    IOUtils.write(imgName + "\t", fileWriter);
+                    for (int f = 0; f < faces.size(); f++) {
 
-                    IOUtils.write(imgName + "\t" + baidu_face_token + "\t" + baidu_face_pro + "\t" + baidu_face_type + "\t"
-                            + baidu_face_type_pro + "\t" + facepp_token + "\t" + acne +"\t" + dark_circle +"\t"
-                            + health +"\t" + stain + "\t" + image_id + "\t" + baidu_data + "\t"
-                            + baidu_data1 + "\t" + data, fileWriter);
+                        JSONObject face = faces.getJSONObject(f);
+                        String facepp_token = face.getString("face_token");
+                        if (!face.containsKey("attributes")) {
+                            continue;
+                        }
+                        if (f > 0) {
+                            IOUtils.write(imgName + "\t", fileWriter);
+                        }
+                        JSONObject skin = face.getJSONObject("attributes").getJSONObject("skinstatus");
+                        // {"acne":16.189,"dark_circle":7.229,"health":18.201,"stain":9.085}
+                        Double acne = skin.getDouble("acne");
+                        Double dark_circle = skin.getDouble("dark_circle");
+                        Double health = skin.getDouble("health");
+                        Double stain = skin.getDouble("stain");
+                        String image_id = JSON.parseObject(data).getString("image_id");
+
+                        IOUtils.write(baidu_face_token + "\t" + baidu_face_pro + "\t" + baidu_face_type + "\t"
+                                + baidu_face_type_pro + "\t" + facepp_token + "\t" + acne + "\t" + dark_circle + "\t"
+                                + health + "\t" + stain + "\t" + image_id + "\t" + baidu_data + "\t"
+                                + baidu_data1 + "\t" + data, fileWriter);
+
+                    }
+
+
+
+
+
                 }
             } catch (IOException e) {
             } finally {

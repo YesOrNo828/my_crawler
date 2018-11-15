@@ -27,19 +27,23 @@ public class BaiduDetect {
     protected static final String access_token = "24.910bbae670d6d1bc631194edfad57c25.2592000.1544710989.282335-14777381";
     protected static String path = "E:\\task\\百度图片抓取\\down\\";
     protected static String detectV3Path = "E:\\task\\百度图片抓取\\detect_v3.txt";
+    protected static String detectV3HumanPath = "E:\\task\\百度图片抓取\\detect_v3_human.txt";
 
     public static void main(String[] args) throws InterruptedException, IOException {
         LOG.info("begin {}", path);
         File dir = new File(path);
         int size = Objects.requireNonNull(dir.listFiles()).length;
         File detectFile = new File(detectV3Path);
+        File detectHumanFile = new File(detectV3HumanPath);
         if (!detectFile.exists()) {
             detectFile.createNewFile();
         }
-        List<String> lines = IOUtils.readLines(new FileInputStream(detectFile));
-        int start = 0;
+        List<String> lines = IOUtils.readLines(new FileInputStream(detectHumanFile));
+        int start = 3461;
         if (CollectionUtils.isNotEmpty(lines)) {
-            start = Integer.parseInt(lines.get(lines.size() - 1).substring(0, 1));
+            String line = lines.get(lines.size() - 1);
+            String name = line.substring(0, line.indexOf(".jpg"));
+            start = Integer.parseInt(name);
         }
         for (int i = start + 1; i < size; i++) {
             File img = new File(path + i + ".jpg");
@@ -52,10 +56,13 @@ public class BaiduDetect {
             LOG.info("{} result: {}", img.getName(), data);
             FileWriter fileWriter = null;
             try {
-                fileWriter = new FileWriter(detectFile, true);
-                IOUtils.write(img.getName() + "\t", fileWriter);
-                if (data.contains("SUCCESS")) {
+                if (data.contains("SUCCESS") && !data.contains("cartoon")) {
+                    fileWriter = new FileWriter(detectHumanFile, true);
+                    IOUtils.write(img.getName() + "\t", fileWriter);
                     JSONArray faceList = JSON.parseObject(data).getJSONObject("result").getJSONArray("face_list");
+                    JSONObject faceType = faceList.getJSONObject(0).getJSONObject("face_type");
+                    String type = faceType.getString("type");
+                    Double pro = faceType.getDouble("probability");
                     for (int f = 0; f < faceList.size(); f++) {
                         if (f > 0) {
                             IOUtils.write("\n" + img.getName() + "\t", fileWriter);
@@ -63,12 +70,13 @@ public class BaiduDetect {
                         JSONObject face = faceList.getJSONObject(f);
                         String face_token = face.getString("face_token");
                         double face_probability = face.getDouble("face_probability");
-                        IOUtils.write(face_token + "\t" + face_probability + "\t" + data, fileWriter);
+                        IOUtils.write(face_token + "\t" + face_probability + "\t" + type + "\t" + pro
+                                + "\t" + data +"\t", fileWriter);
                     }
-                } else {
-                    IOUtils.write("\t\t" + data, fileWriter);
+                    IOUtils.write("\n", fileWriter);
+                } else if (data.contains("qps")){
+                    LOG.info("{} result: {}", img.getName(), data);
                 }
-                IOUtils.write("\n", fileWriter);
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
@@ -80,7 +88,7 @@ public class BaiduDetect {
                     }
                 }
             }
-            Thread.currentThread().sleep(800);
+            Thread.currentThread().sleep(500);
         }
     }
 
@@ -88,6 +96,7 @@ public class BaiduDetect {
         List<Param> params = new ArrayList<>(3);
         params.add(new Param("image", imageBase64));
         params.add(new Param("image_type", "BASE64"));
+        params.add(new Param("face_field", "face_type"));
 //        params.add(new Param("image", "313c1fdc1c322c582d930d99e5acfe18"));
 //        params.add(new Param("image_type", "FACE_TOKEN"));
         String contentType = "application/json";
